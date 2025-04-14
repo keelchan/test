@@ -7,8 +7,8 @@ import { LocalizedLink } from "@/components/LocalizedLink"
 import { CollectionsSection } from "@/components/CollectionsSection"
 
 export const metadata: Metadata = {
-  title: "Inspiration",
-  description: "Get inspired by our latest collections",
+  title: "Costumes",
+  description: "Design de costumes",
 }
 
 export async function generateStaticParams() {
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
   return staticParams
 }
 
-export default function InspirationPage() {
+export default function CostumesPage() {
   return (
     <>
       <div className="max-md:pt-18">

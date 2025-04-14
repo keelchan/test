@@ -30,6 +30,10 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
+  "pp_stripe-twint_stripe": {
+    title: "Twint",
+    icon: <Bancontact />,
+  },
   // Add more payment providers here
 }
 

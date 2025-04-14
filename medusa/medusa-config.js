@@ -7,10 +7,11 @@ module.exports = defineConfig({
     backendUrl:
       process.env.BACKEND_URL ?? 'https://sofa-society-starter.medusajs.app',
     storefrontUrl: process.env.STOREFRONT_URL,
+    // disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    redisUrl: process.env.REDIS_URL,
+    redisUrl: process.env.REDIS_URL + "?family=0",
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
@@ -18,6 +19,7 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
     },
+    // workerMode: process.env.MEDUSA_WORKER_MODE,
   },
   modules: [
     {
@@ -33,6 +35,12 @@ module.exports = defineConfig({
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/cache-redis",
+      options: { 
+        redisUrl: process.env.CACHE_REDIS_URL,
       },
     },
     {
@@ -172,5 +180,39 @@ module.exports = defineConfig({
         },
       },
     },
+    {
+      resolve: "./src/modules/sanity",
+      options: {
+        api_token: process.env.SANITY_API_TOKEN,
+        project_id: process.env.SANITY_PROJECT_ID,
+        api_version: new Date().toISOString().split("T")[0],
+        dataset: "production",
+        studio_url: process.env.SANITY_STUDIO_URL || 
+          "http://localhost:3000/studio",
+        type_map: {
+          product: "product",
+        },
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/cache-redis",
+      options: {
+        redisUrl: process.env.REDIS_URL + "?family=0",
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/event-bus-redis",
+      options: {
+        redisUrl: process.env.REDIS_URL + "?family=0",
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/workflow-engine-redis",
+      options: {
+        redis: {
+          url: process.env.REDIS_URL + "?family=0",
+        },
+      },
+    },
   ],
-});
+})

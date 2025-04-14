@@ -12,6 +12,7 @@ import {
 import { HttpTypes } from '@medusajs/framework/types';
 import EmailLayout, { EmailLayoutProps } from './components/EmailLayout';
 
+
 type Props = {
   order: Pick<
     HttpTypes.AdminOrder,

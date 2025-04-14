@@ -14,6 +14,9 @@ import { Layout, LayoutColumn } from "@/components/Layout"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
+  sanity?: {
+    content: string
+  }
   materials: {
     id: string
     name: string
@@ -29,6 +32,7 @@ type ProductTemplateProps = {
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
   product,
+  sanity,
   materials,
   region,
   countryCode,
@@ -62,9 +66,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               </div>
             )}
             <div className="sticky flex-1 top-0">
-              <ProductInfo product={product} />
+              <ProductInfo product={product}/>
               <ProductActions
                 product={product}
+                sanity={sanity}
                 materials={materials}
                 region={region}
               />

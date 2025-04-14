@@ -22,6 +22,9 @@ import { useAddLineItem } from "hooks/cart"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
+  sanity?: {
+    content: string
+  }
   materials: {
     id: string
     name: string
@@ -48,6 +51,7 @@ const optionsAsKeymap = (
 
 const priorityOptions = ["Material", "Color", "Size"]
 
+
 const getInitialOptions = (product: ProductActionsProps["product"]) => {
   if (product.variants?.length === 1) {
     const variantOptions = optionsAsKeymap(product.variants[0].options)
@@ -72,7 +76,12 @@ const getInitialOptions = (product: ProductActionsProps["product"]) => {
   return null
 }
 
-function ProductActions({ product, materials, disabled }: ProductActionsProps) {
+export default function ProductActions({
+  product,
+  sanity,
+  materials,
+  disabled,
+}: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string | undefined>>(
     getInitialOptions(product) ?? {}
   )
@@ -164,7 +173,7 @@ function ProductActions({ product, materials, disabled }: ProductActionsProps) {
     <>
       <ProductPrice product={product} variant={selectedVariant} />
       <div className="max-md:text-xs mb-8 md:mb-16 max-w-120">
-        <p>{product.description}</p>
+        <p>{sanity?.content || product.description}</p>
       </div>
       {hasMultipleVariants && (
         <div className="flex flex-col gap-8 md:gap-6 mb-4 md:mb-26">
