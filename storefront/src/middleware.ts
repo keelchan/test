@@ -65,7 +65,9 @@ async function getCountryCode(
 
     const urlCountryCode = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
 
-    if (urlCountryCode && regionMap.has(urlCountryCode)) {
+    if (
+      request.nextUrl.pathname.startsWith("/studio") ||
+      urlCountryCode && regionMap.has(urlCountryCode)) {
       countryCode = urlCountryCode
     } else if (vercelCountryCode && regionMap.has(vercelCountryCode)) {
       countryCode = vercelCountryCode

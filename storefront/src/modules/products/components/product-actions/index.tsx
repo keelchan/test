@@ -21,6 +21,9 @@ import { UiRadioGroup } from "@/components/ui/Radio"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
+  sanity?: {
+    content: string
+  }
   materials: {
     id: string
     name: string
@@ -46,6 +49,7 @@ const optionsAsKeymap = (
 }
 
 const priorityOptions = ["Material", "Color", "Size"]
+
 
 const getInitialOptions = (product: ProductActionsProps["product"]) => {
   if (product.variants?.length === 1) {
@@ -73,6 +77,7 @@ const getInitialOptions = (product: ProductActionsProps["product"]) => {
 
 export default function ProductActions({
   product,
+  sanity,
   materials,
   disabled,
 }: ProductActionsProps) {
@@ -170,7 +175,7 @@ export default function ProductActions({
     <>
       <ProductPrice product={product} variant={selectedVariant} />
       <div className="max-md:text-xs mb-8 md:mb-16 max-w-120">
-        <p>{product.description}</p>
+        <p>{sanity?.content || product.description}</p>
       </div>
       {hasMultipleVariants && (
         <div className="flex flex-col gap-8 md:gap-6 mb-4 md:mb-26">

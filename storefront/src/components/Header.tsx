@@ -39,11 +39,11 @@ export const Header: React.FC = async () => {
           <LayoutColumn>
             <div className="flex justify-between items-center h-18 md:h-21">
               <h1 className="font-medium text-md">
-                <LocalizedLink href="/">SofaSocietyCo.</LocalizedLink>
+                <LocalizedLink href="/">Safia Semlali</LocalizedLink>
               </h1>
-              <div className="flex items-center gap-8 max-md:hidden">
+              <div className="flex items-center gap-8 max-md:hidden font-medium text-md">
                 <LocalizedLink href="/about">About</LocalizedLink>
-                <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
+                <LocalizedLink href="/costumes">Costumes</LocalizedLink>
                 <LocalizedLink href="/store">Shop</LocalizedLink>
               </div>
               <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">

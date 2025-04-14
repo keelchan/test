@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { client } from "../../../../../sanity/lib/client"
 
 import { sdk } from "@lib/config"
 import { getRegion, listRegions } from "@lib/data/regions"
@@ -95,12 +96,16 @@ export default async function ProductPage({ params }: Props) {
     notFound()
   }
 
+  // alternatively, you can filter the content by the language
+  const sanity = (await client.getDocument(pricedProduct.id))?.specs[0]
+
   return (
     <ProductTemplate
       product={pricedProduct}
       materials={fashionData.materials}
       region={region}
       countryCode={countryCode}
+      sanity={sanity} 
     />
   )
 }

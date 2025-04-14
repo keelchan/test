@@ -1,15 +1,28 @@
 import { Metadata } from "next"
 import Image from "next/image"
+import { sanityFetch } from "../../../sanity/lib/live"
+import { EVENTS_QUERY } from "../../../sanity/lib/queries"
 import { getRegion } from "@lib/data/regions"
 import { getProductTypesList } from "@lib/data/product-types"
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { LocalizedLink } from "@/components/LocalizedLink"
 import { CollectionsSection } from "@/components/CollectionsSection"
 
+
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
   description:
     "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
+}
+
+type Event = {
+  _id: string;
+  title?: string;
+  name: string;
+  date: string;
+  slug?: {
+    current: string;
+  };
 }
 
 const ProductTypesSection: React.FC = async () => {
@@ -62,6 +75,7 @@ export default async function Home({
 }) {
   const { countryCode } = await params
   const region = await getRegion(countryCode)
+  const { data: events } = await sanityFetch({ query: EVENTS_QUERY })
 
   if (!region) {
     return null
@@ -71,7 +85,7 @@ export default async function Home({
     <>
       <div className="max-md:pt-18">
         <Image
-          src="/images/content/living-room-gray-armchair-two-seater-sofa.png"
+          src="/images/content/berlingo_noir4.jpg"
           width={2880}
           height={1500}
           alt="Living room with gray armchair and two-seater sofa"
@@ -94,6 +108,29 @@ export default async function Home({
                 </LocalizedLink>
               </div>
             </div>
+          </LayoutColumn>
+        </Layout>
+        <Layout className="mb-26 md:mb-36">
+          <LayoutColumn className="col-span-full">
+            <h3 className="text-md max-md:mb-6 md:text-2xl">
+              Events
+            </h3>
+          </LayoutColumn>
+          <LayoutColumn>
+            <ul className="col-span-full">
+              {events.map((event: Event ) => (
+                <li className="bg-black-10% p-4 rounded-md mb-5 md:text-s" key={event._id}>
+                  <LocalizedLink className="hover:underline" href={`/events/${event?.slug?.current}`}>
+                  <h2 className="md:text-md font-semibold">{event?.name}</h2>
+                  {event?.date && (
+                    <p className="text-gray-500">
+                      {new Date(event.date).toLocaleDateString()}
+                    </p>
+                  )}
+                  </LocalizedLink>
+                </li>
+              ))}
+             </ul>
           </LayoutColumn>
         </Layout>
         <ProductTypesSection />
