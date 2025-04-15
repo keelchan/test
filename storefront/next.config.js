@@ -21,6 +21,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "safiasemlali.s3.eu-north-1.amazonaws.com",
+      },
     ],
   },
 }
