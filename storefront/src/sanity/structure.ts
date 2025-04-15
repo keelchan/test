@@ -1,4 +1,3 @@
-import type {StructureResolver} from 'sanity/structure'
 import {CalendarIcon, UsersIcon, PinIcon, BasketIcon} from '@sanity/icons'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
