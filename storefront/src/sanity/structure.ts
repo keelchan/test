@@ -1,7 +1,8 @@
+import type {StructureResolver} from 'sanity/desk'
 import {CalendarIcon, UsersIcon, PinIcon, BasketIcon} from '@sanity/icons'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure = (S) =>
+export const structure: StructureResolver = (S) =>
   S.list()
     .id('root')
     .title('Content')
