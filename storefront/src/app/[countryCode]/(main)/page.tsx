@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
 }
+export const revalidate = 60 // Revalidation toutes les 60 secondes
 
 type Event = {
   _id: string;
@@ -90,6 +91,7 @@ export default async function Home({
           height={1500}
           alt="Living room with gray armchair and two-seater sofa"
           className="md:h-screen md:object-cover"
+          priority
         />
       </div>
       <div className="pt-8 pb-26 md:pt-26 md:pb-36">
