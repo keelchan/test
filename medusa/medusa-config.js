@@ -38,18 +38,6 @@ module.exports = defineConfig({
       },
     },
     {
-      resolve: "@medusajs/medusa/cache-redis",
-      options: { 
-        redisUrl: process.env.CACHE_REDIS_URL,
-      },
-    },
-    {
-      resolve: "@medusajs/medusa/cache-redis",
-      options: { 
-        redisUrl: process.env.CACHE_REDIS_URL,
-      },
-    },
-    {
       resolve: './src/modules/fashion',
     },
     {
