@@ -8,11 +8,9 @@ module.exports = defineConfig({
       process.env.BACKEND_URL ?? 'https://sofa-society-starter.medusajs.app',
     storefrontUrl: process.env.STOREFRONT_URL,
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
-    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    redisUrl: process.env.REDIS_URL + "?family=0",
     redisUrl: process.env.REDIS_URL + "?family=0",
     http: {
       storeCors: process.env.STORE_CORS,
@@ -21,7 +19,6 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
     },
-    workerMode: process.env.MEDUSA_WORKER_MODE,
     workerMode: process.env.MEDUSA_WORKER_MODE,
   },
   modules: [
